@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PCAPHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MagicNumber" type="xs:string" />
+        <xs:element name="Version">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Major" type="xs:unsignedByte" />
+              <xs:element name="Minor" type="xs:unsignedByte" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Zone" type="xs:unsignedByte" />
+        <xs:element name="SigFigs" type="xs:unsignedByte" />
+        <xs:element name="SnapLen" type="xs:unsignedShort" />
+        <xs:element name="Network" type="xs:unsignedByte" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Packet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PacketHeader">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Seconds" type="xs:unsignedInt" />
+              <xs:element name="USeconds" type="xs:unsignedInt" />
+              <xs:element name="InclLen" type="xs:unsignedByte" />
+              <xs:element name="OrigLen" type="xs:unsignedByte" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LinkLayer">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ethernet">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MACDest" type="xs:string" />
+                    <xs:element name="MACSrc" type="xs:string" />
+                    <xs:element name="Ethertype" type="xs:unsignedShort" />
+                    <xs:element name="NetworkLayer">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="IPv4">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="IPv4Header">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Version" type="xs:unsignedByte" />
+                                      <xs:element name="IHL" type="xs:unsignedByte" />
+                                      <xs:element name="DSCP" type="xs:unsignedByte" />
+                                      <xs:element name="ECN" type="xs:unsignedByte" />
+                                      <xs:element name="Length" type="xs:unsignedByte" />
+                                      <xs:element name="Identification" type="xs:unsignedShort" />
+                                      <xs:element name="Flags" type="xs:unsignedByte" />
+                                      <xs:element name="FragmentOffset" type="xs:unsignedByte" />
+                                      <xs:element name="TTL" type="xs:unsignedByte" />
+                                      <xs:element name="Protocol" type="xs:unsignedByte" />
+                                      <xs:element name="Checksum" type="xs:unsignedShort" />
+                                      <xs:element name="IPSrc">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="value" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="IPDest">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="value" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Protocol" type="xs:unsignedByte" />
+                                <xs:element name="ICMPv4">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Type" type="xs:unsignedByte" />
+                                      <xs:element name="Code" type="xs:unsignedByte" />
+                                      <xs:element name="Checksum" type="xs:unsignedShort" />
+                                      <xs:element minOccurs="0" name="EchoReply">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Identifier" type="xs:unsignedShort" />
+                                            <xs:element name="SequenceNumber" type="xs:unsignedShort" />
+                                            <xs:element name="Payload" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element minOccurs="0" name="EchoRequest">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Identifier" type="xs:unsignedShort" />
+                                            <xs:element name="SequenceNumber" type="xs:unsignedShort" />
+                                            <xs:element name="Payload" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

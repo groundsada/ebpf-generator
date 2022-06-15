@@ -1,0 +1,70 @@
+-----------------------------------------------------------------------------
+-- Natural Rule Language File 
+-- 
+-- Whenever you save this file, it will be automatically checked for errors.
+-- Press CTRL+Space to get help with referring to your model elements.
+-----------------------------------------------------------------------------
+
+Model "schema1.xsd"
+
+Rule Set "Expressions"
+
+Context: IPDest
+Validation Rule "r1"
+value = 6
+
+Context: IPSrc
+Action Rule "r2"
+Set value to '0.0.0.'
+
+Context: IPv4Header
+Action Rule "r3"
+Set IPDest.value to '1.2.2.2'
+
+Context: IPv4
+Validation Rule "r4"
+The IPv4Header.Version is equal to '4'
+
+
+--Illegal1--
+--Context: IPSrc
+--Validation Rule "r5"
+--IPSrc.value is before IPDest.value
+
+Context: Packet
+Validation Rule "r5"
+At most two of the PacketHeader have their Seconds equal to 
+PacketHeader.USeconds and exactly one of the 
+PacketHeader has its InclLen equal to PacketHeader.OrigLen
+
+Context: IPv4Header
+Validation Rule "t1"
+If the Flags is equal to '0' then exactly one Version is present
+
+Context: IPv4Header
+Validation Rule "t2"
+In each of the IPv4Header the Flags is one of '0', '1'
+
+Context: IPv4Header
+Validation Rule "s1"
+Length is equal to (Identification - Protocol) * (1 - Flags) 
+
+Context: IPv4Header
+Validation Rule "s2"
+Flags is greater than or equal to 0 and Flags is less than or equal to 1
+
+Context: IPv4Header
+Validation Rule "zero-sum"
+If the Flags is equal to '0' then the Version is equal to 1
+
+Context: IPv4Header
+Validation Rule "s3"
+The Length >= 0
+
+Context: IPv4Header
+Validation Rule "p1"
+'Version' = 'Versio' + 'n'
+
+Context: IPv4Header
+Validation Rule "t1-2"
+If the Version is equal to '4' then at least two IHL are present and at most three IHL are present
